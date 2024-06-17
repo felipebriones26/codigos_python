@@ -22,7 +22,7 @@ def menu():
         else:
           print("ingrese una opcion valida")
 
-tipo_de_juego=menu()
+
 
 jugador1= "X"
 
@@ -30,9 +30,16 @@ jugador2= "O"
 
 Computadora= "O"
 
-tab = ["1","2","3",
-       "4","5","6",
-       "7","8","9"]
+
+
+def reiniciar_tablero():
+    global tab
+    tab = ["1", "2", "3",
+           "4", "5", "6",
+           "7", "8", "9"]
+
+    
+
 
 def imprimir_tablero(tab):
     
@@ -94,6 +101,7 @@ def verificar_ganador(tab):
     return None
  
 def jvsj():
+    reiniciar_tablero()
     while True:        
         limpiar_terminal()
         imprimir_tablero(tab)
@@ -116,30 +124,42 @@ def jvsj():
         imprimir_tablero(tab)
 
 def jvsc():
-      while True:
-        limpiar_terminal()
-        imprimir_tablero(tab)
-        eleccion_del_jugador1(tab)
-        resultado = verificar_ganador(tab)
-        if resultado is not None:
+    reiniciar_tablero()
+    while True:
             limpiar_terminal()
             imprimir_tablero(tab)
-            print(resultado) 
-            break
-        limpiar_terminal() 
-        imprimir_tablero(tab)  
-        eleccion_de_computadora(tab)
-        resultado = verificar_ganador(tab)
-        if resultado is not None:
-            limpiar_terminal()
-            imprimir_tablero(tab)
-            print(resultado) 
-            break
-        imprimir_tablero(tab)         
+            eleccion_del_jugador1(tab)
+            resultado = verificar_ganador(tab)
+            if resultado is not None:
+                limpiar_terminal()
+                imprimir_tablero(tab)
+                print(resultado) 
+                break
+            limpiar_terminal() 
+            imprimir_tablero(tab)  
+            eleccion_de_computadora(tab)
+            resultado = verificar_ganador(tab)
+            if resultado is not None:
+                limpiar_terminal()
+                imprimir_tablero(tab)
+                print(resultado) 
+                break
+            imprimir_tablero(tab)         
 
-if tipo_de_juego=="1":
-    jvsj()
-elif tipo_de_juego=="2":
-    jvsc()            
-elif tipo_de_juego=="3":
-    print("Adiossss")   
+while True:
+    
+    tipo_de_juego=menu()
+    if tipo_de_juego=="1":
+            jvsj()
+    elif tipo_de_juego=="2":
+            jvsc()            
+    elif tipo_de_juego=="3":
+            print("Adiosss")
+            break
+    nueva_partida=input("¿Deseas jugar una nueva partida? (si/no): ")
+    if nueva_partida.lower()=="si":
+        print("Comenzando nueva partida")
+        reiniciar_tablero()
+    else:
+        print("Cerrando el programa")
+        break 
